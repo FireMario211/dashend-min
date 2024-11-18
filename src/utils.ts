@@ -102,7 +102,6 @@ export function parse_gj_messages_response(result: string): Result<GDMessage[], 
                 values.set(last_key, trimEndMatches(items[i], ' '));
             }
         }
-        console.log(values)
         const subject = values.get(4);
         if (!subject) {
             errors.push(GenError.ParseError);

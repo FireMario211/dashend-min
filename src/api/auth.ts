@@ -41,7 +41,7 @@ router.get("/api/v1/request_challenge/:id",
             id: randomUUID(),
             attempts: 0
         };
-        pending_challenges.set(gd_acc, meow, 8000)
+        pending_challenges.set(gd_acc, meow, 15000)
         const response: ApiResponse<Challenge> = {
             success: true,
             message: "success",
@@ -108,7 +108,7 @@ setInterval(async () => {
                 completed_challenges.set(m.from, {
                     challenge: auth_code.toString(),
                     gd_account_name: m.gd_account_name
-                }, 8000);
+                }, 15000);
                 return m.id
             }
             return ""
@@ -135,7 +135,7 @@ setInterval(async () => {
             }).catch(console.error)
         }
     }).catch(console.error)
-}, 1500)
+}, 5000)
 
 router.get("/api/v1/challenge_complete/:id", 
     param('id').isUUID().notEmpty(),
