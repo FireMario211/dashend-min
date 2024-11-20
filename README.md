@@ -29,7 +29,9 @@ Do note that everything is **in memory**, meaning if the server restarts or shut
 Also it's recommended to use my fork of [dashauth](https://github.com/FireMario211/dashauth) as currently the one made by rooot isn't ported to Geode v4
 
 # Other API Routes not mentioned (that were added by me)
-### `GET [base url]/verify`
+### `POST [base url]/verify`
+#### Body:
+- `token` The token to check if it's valid
 #### Returns:
-- *200 Ok* if the **token** is valid
-- 401 Unauthorized if the token is invalid.
+- `200 Ok` if the **token** is valid
+- `401 Unauthorized` if the token is invalid.
