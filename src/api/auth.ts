@@ -41,7 +41,7 @@ router.get("/api/v1/request_challenge/:id",
             id: randomUUID(),
             attempts: 0
         };
-        pending_challenges.set(gd_acc, meow, 15000)
+        pending_challenges.set(gd_acc, meow, 8000)
         const response: ApiResponse<Challenge> = {
             success: true,
             message: "success",
@@ -54,17 +54,19 @@ router.get("/api/v1/request_challenge/:id",
 router.post("/api/v1/verify",
     body('token').notEmpty().isString().withMessage("Token is required"),
     async (req: Request, res: Response) => {
-        const result = validationResult(req);
-        if (!result.isEmpty()) return GenericError.make_validator_msg(res, result.array());
-        const token = req.body.token as string;
-        const verifyRes = verifyToken(token);
-        if (verifyRes.err) return GenericError.make_response_msg(res, 401, verifyRes.val);
-        const response: ApiResponse<User> = {
-            success: true,
-            message: "success",
-            data: verifyRes.val
-        }
-        return res.status(200).json(response);
+        setTimeout(() => {
+            const result = validationResult(req);
+            if (!result.isEmpty()) return GenericError.make_validator_msg(res, result.array());
+            const token = req.body.token as string;
+            const verifyRes = verifyToken(token);
+            if (verifyRes.err) return GenericError.make_response_msg(res, 401, verifyRes.val);
+            const response: ApiResponse<User> = {
+                success: true,
+                message: "success",
+                data: verifyRes.val
+            }
+            return res.status(200).json(response);
+        }, 100)
     }
 );
 
@@ -177,14 +179,14 @@ router.get("/api/v1/challenge_complete/:id",
                     }
                     res.json(response);
                 } else {
-                    console.log(`nuh uh ???? ${completed_challenge} =/= ${challenge.challenge}`)
+                    console.log(`nuh uh ???? ${completed_challenge.challenge} =/= ${challenge.challenge}`)
                     GenericError.respond_to(res, GenError.InvalidAuthenticationError)
                 }
             } else {
                 console.log("didnt get enough time...?")
                 GenericError.respond_to(res, GenError.InvalidAuthenticationError)
             }
-        }, 2000);
+        }, 4000);
 
     }
 )
