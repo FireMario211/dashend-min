@@ -35,3 +35,16 @@ Also it's recommended to use my fork of [dashauth](https://github.com/FireMario2
 #### Returns:
 - `200 Ok` if the **token** is valid
 - `401 Unauthorized` if the token is invalid.
+#### Example response if OK:
+```js
+{
+    success: true,
+    message: "success",
+    data: {
+        id: 6253758, // GD Account ID
+        username: "FireeDev", // GD Account Username
+        token: "846b5af4434a935aa25bd0fb04c067502550df64307498067a0dff9a13190788",
+        token_expiration: '2024-12-07T19:33:47.840Z' 
+    }
+}
+```
