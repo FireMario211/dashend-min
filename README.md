@@ -48,3 +48,6 @@ Also it's recommended to use my fork of [dashauth](https://github.com/FireMario2
     }
 }
 ```
+
+# Instances using this repo
+- `dashend.firee.dev`
